@@ -22,7 +22,9 @@
     }
 </style>
 <script type = "text/javascript">
-
+<!-- the following funtion is used when fetching the charts.
+the logic used is to loop through the chart idicator ids and match
+them to the id of the selected indicator then the chart is loaded.-->
     function dispCharts(ind_id)
     {
         chats = [];
@@ -34,7 +36,8 @@
                         $(d.indicators).each(function (i, cdata){
                             if (ind_id == cdata.id)
                             {
-
+<!-- this is a condition that checks if the chart's indicator id matches the id of the selected idicator.
+if they are similar ten we create a new imaje object and assign its source to the chart's location. -->
                                 chats.push(schart.id);
                                 image1 = new Image();
                                 image1.src = '../../../api/charts/'+schart.id+'/data';
@@ -52,7 +55,9 @@
         });
         $("#charts").append("<hr/>");
     }
-
+<!-- the following funtion is used when fetching the maps.
+the logic used is to loop through the maps idicator ids, if they match
+the id of the selected indicator then the map is loaded.-->
     function dispMaps(ind_id)
     {
         chats = [];
@@ -82,7 +87,9 @@
         });
         $("#maps").append("<hr/>");
     }
-
+<!-- the following funtion is used when fetching the reports.
+the logic used is to loop through the reports idicator ids, if they match
+the id of the selected indicator then the report is loaded.-->
     function dispReports(ind_id)
     {
         chats = [];
@@ -118,15 +125,21 @@
 
 
     $(document).ready(function(){
-        $("#search").keyup(function(){
+<!-- when the document is done loading, this function is used
+to minimize the chances of the scrips running before the whole document has loaded. -->
+    
+        $("#search").keyup(function(){  <!-- this is used to run a script or function after the release of a key -->
             $("#charts").html("");
             $("#results").html("");
             $("#maps").html("");
             $.get('../../../api/indicatorGroups/query/'+$(this).val()+'.json', function(json){
+<!-- this function is used to loop through the indicator groups and find the group that matches to the entered letters-->
+
                 $(json.indicatorGroups).each(function(i, data){
                     var anchor = $("<a></a>").attr("href",data.href).append(data.name);
                     $("#results").append(anchor).append("<br/>");
                     anchor.bind("click",function(e){
+<!-- this is a function that is used to search fro the indicators linked to a selected indicator group -->
                         $("#section").html("");
                         e.preventDefault();
                         $.get($(this).attr("href")+".json", function(json){
@@ -153,15 +166,19 @@
     <label for = "search">Search Indicator Group</label>
     <input type = "text" id = "search"/>
     <div id = "results">
-
-    </div>
+<!-- display of the indicator groups -->
+    </div> 
     <div id = "section">
+<!-- display of the indicators-->
     </div>
     <div id = "charts">
+<!-- display of the charts -->
     </div>
     <div id = "maps">
+<!-- display of the maps -->
     </div>
     <div id = "reports">
+<!-- display of the reports -->
     </div>
 </div>
 </html>
