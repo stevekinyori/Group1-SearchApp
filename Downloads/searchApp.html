@@ -36,8 +36,8 @@ them to the id of the selected indicator then the chart is loaded.-->
                         $(d.indicators).each(function (i, cdata){
                             if (ind_id == cdata.id)
                             {
-<!-- this is a condition that checks if the chart's indicator id matches the id of the selected idicator.
-if they are similar ten we create a new imaje object and assign its source to the chart's location. -->
+<!-- this is a condition that checks if the chart's indicator id matches the id of the selected idicator.-->
+<!--if they are similar ten we create a new imaje object and assign its source to the chart's location.-->
                                 chats.push(schart.id);
                                 image1 = new Image();
                                 image1.src = '../../../api/charts/'+schart.id+'/data';
